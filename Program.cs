@@ -31,8 +31,10 @@ Console.WriteLine();
 
 while (true)
 {
+    Console.ForegroundColor = ConsoleColor.Green;
     Console.Write("Question> ");
     var question = Console.ReadLine();
+    Console.ResetColor();
 
     if (string.IsNullOrWhiteSpace(question) ||
         question.Trim().Equals("exit", StringComparison.OrdinalIgnoreCase))
@@ -43,6 +45,7 @@ while (true)
     var result = await ragService.AskAsync(question);
 
     Console.WriteLine();
+    Console.ForegroundColor = ConsoleColor.Yellow;
     Console.WriteLine("[Retrieval] Top matching policy sections:");
     foreach (var chunk in result.RetrievedChunks)
     {
@@ -53,6 +56,7 @@ while (true)
     Console.WriteLine("[Augmentation] Retrieved section content added to the LLM prompt as context.");
 
     Console.WriteLine();
+    Console.ResetColor();
     Console.WriteLine("[Generation] Answer:");
     Console.WriteLine(result.Answer);
     Console.WriteLine();
